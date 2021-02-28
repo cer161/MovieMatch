@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>1080</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="skipButton">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>780</y>
+      <width>250</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Skip!</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="watchButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>780</y>
+      <width>250</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Watch!</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="inputGenres">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>890</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addGenreButton">
+    <property name="geometry">
+     <rect>
+      <x>265</x>
+      <y>915</y>
+      <width>70</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add Genre</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="swipeButton">
+    <property name="geometry">
+     <rect>
+      <x>265</x>
+      <y>950</y>
+      <width>70</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start Swiping</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>10</y>
+      <width>500</width>
+      <height>750</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../Downloads/uwjaCH7PiWrkz7oWJ4fcL3xGrb0.jpg</pixmap>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
