@@ -30,6 +30,7 @@ imageUrl = 'https://image.tmdb.org/t/p/w500///hm58Jw4Lw8OIeECIq5qyPYhAeRJ.jpg'
 imageData = urllib.request.urlopen(imageUrl).read()
 image = QtGui.QImage()
 image.loadFromData(imageData)
+image.load('movieMatch.jpg')
 
 urlG = 'https://api.themoviedb.org/3/genre/movie/list?api_key=31657fcbc4dc6a9f0e0277b60a6314e9&language=en-US'
 json_objG = urlopen(urlG)
@@ -46,6 +47,8 @@ while dataG['genres'] is not None:
 
 def getGenreID(genreName):
     return idList[nameList.index(genreName)]
+def getGenreName(genreID):
+    return nameList[idList.index(genreID)]
 
 genreString = ""
 
@@ -102,7 +105,6 @@ class Ui_MainWindow(object):
 
         self.infoLabel = QtWidgets.QLabel(self.page)
         self.infoLabel.setGeometry(QtCore.QRect(50,10,500,750))
-
         self.infoLabel.setObjectName("infoLabel")
     
 
@@ -129,6 +131,33 @@ class Ui_MainWindow(object):
         self.genreList.setModel(self.model)
 
         self.stackedWidget.addWidget(self.page_2)
+
+        self.page_3 = QtWidgets.QWidget()
+        self.page.setObjectName("page_3")
+
+        self.outputList = QtWidgets.QListView(self.page_3)
+        self.outputList.setGeometry(QtCore.QRect(0, 0, 601, 791))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.model2 = QtGui.QStandardItemModel()
+        self.outputList.setFont(font)
+        self.outputList.setObjectName("outputList")
+        self.outputList.clicked[QtCore.QModelIndex].connect(self.on_clicked)
+        self.outputWatch = QtWidgets.QPushButton(self.page_3)
+        self.outputWatch.setGeometry(QtCore.QRect(310, 850, 250, 100))
+        self.outputWatch.setObjectName("outputWatch")
+        self.outputWatch.clicked.connect(self.outputWClicked)
+        self.outputSkip = QtWidgets.QPushButton(self.page_3)
+        self.outputSkip.setGeometry(QtCore.QRect(40, 850, 250, 100))
+        self.outputSkip.setObjectName("outputSkip")
+        self.outputSkip.clicked.connect(self.outputNClicked)
+        self.stackedWidget.addWidget(self.page_3)
+        self.returnButton = QtWidgets.QPushButton(self.page_3)
+        self.returnButton.setGeometry(QtCore.QRect(255,985,90,31))
+        self.returnButton.setObjectName("returnButton")
+        self.returnButton.clicked.connect(self.returnClicked)
+        
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -155,12 +184,14 @@ class Ui_MainWindow(object):
         self.printButton.setText(_translate("MainWindow", "Print List"))
         self.testButton.setText(_translate("MainWindow", "Choose Genres"))
         self.testButton2.setText(_translate("MainWindow", "Done"))
-
+        self.outputWatch.setText(_translate("MainWindow", "View Watch List"))
+        self.outputSkip.setText(_translate("MainWindow", "View Skip List"))
+        self.returnButton.setText(_translate("MainWindow", "Return"))
 
     def watchClicked(self):
         global i
         print(i)
-        yesList.append(var[i]['id'])
+        yesList.append(var[i]['title'])
         i += 1
         if i == 20:
             self.updateLink()
@@ -169,7 +200,7 @@ class Ui_MainWindow(object):
 
     def skipClicked(self):
         global i
-        noList.append(var[i]['id'])
+        noList.append(var[i]['title'])
         i += 1
         if i == 20:
             self.updateLink()
@@ -197,6 +228,7 @@ class Ui_MainWindow(object):
         global imageUrl
         global image
         global visitedList
+        i = 0
         strGenre = ""
         for item in genresList:
             strGenre += str(getGenreID(item)) + ","
@@ -250,7 +282,7 @@ class Ui_MainWindow(object):
 
     def printClicked(self):
         global yesList
-        print(yesList)
+        self.stackedWidget.setCurrentIndex(2)
     def testClicked(self):
         self.stackedWidget.setCurrentIndex(1)
     def testClicked2(self):
@@ -260,6 +292,47 @@ class Ui_MainWindow(object):
                 genresList.append(item.text())
         print(genresList)
         self.stackedWidget.setCurrentIndex(0)
+    def returnClicked(self):
+        self.stackedWidget.setCurrentIndex(0)
+    def outputWClicked(self):
+        o = 0
+        self.model2 = QtGui.QStandardItemModel()
+        for i in yesList:
+            item2 = QtGui.QStandardItem(yesList[o])
+            item2.setSelectable(True)
+            self.model2.appendRow(item2)
+            o += 1
+        self.outputList.setModel(self.model2)
+    def outputNClicked(self):
+        o = 0
+        self.model2 = QtGui.QStandardItemModel()
+        for i in noList:
+            item2 = QtGui.QStandardItem(noList[o])
+            item2.setSelectable(True)
+            self.model2.appendRow(item2)
+            o += 1
+        self.outputList.setModel(self.model2)
+    def removeSelected(self):
+        for i in range(self.model2.rowCount()): 
+            item = self.model2.item(i)
+            print(str(item.data()))
+    def on_clicked(self,index):
+        global yesList
+        global noList
+        item = self.model2.itemFromIndex(index)
+        strI = item.text()
+        index2 = 0
+        print(strI)
+        for i in range(self.model2.rowCount()):
+            if item == self.model2.item(i):
+                self.model2.removeRow(index2)
+            index2 += 1
+        if strI in yesList:
+            yesList.remove(strI)
+        if strI in noList:
+            noList.remove(strI)
+        
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

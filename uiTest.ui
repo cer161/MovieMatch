@@ -13,7 +13,20 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: rgb(56, 58, 89);	
+	color: rgb(220, 220, 220);
+	border-radius: 10px;
+}</string>
+   </property>
    <widget class="QPushButton" name="skipButton">
     <property name="geometry">
      <rect>
@@ -36,6 +49,22 @@
       <height>100</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>40</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	background-color: rgb(70, 70, 89);	
+	color: rgb(220, 220, 220);
+	border-radius: 10px
+}</string>
+    </property>
     <property name="text">
      <string>Watch!</string>
     </property>
@@ -53,9 +82,9 @@
    <widget class="QPushButton" name="addGenreButton">
     <property name="geometry">
      <rect>
-      <x>265</x>
+      <x>255</x>
       <y>915</y>
-      <width>70</width>
+      <width>90</width>
       <height>31</height>
      </rect>
     </property>
@@ -66,14 +95,14 @@
    <widget class="QPushButton" name="swipeButton">
     <property name="geometry">
      <rect>
-      <x>265</x>
+      <x>255</x>
       <y>950</y>
-      <width>70</width>
+      <width>90</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Start Swiping</string>
+     <string>Choose Genres</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
