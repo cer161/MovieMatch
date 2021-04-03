@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="static/css/style.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,500&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+		/>
+		<title>Document</title>
+	</head>
+	<body>
+		<section class=>
+			<div class="navbar">
+				<div class="container">
+					<a class="logo" href="#">Movie<span>Match</span></a>
+		
+					<img id="mobile-cta" class="mobile-menu" src="static/images/menu.svg" alt="Open Navigation">
+		
+					<nav>
+						<img id="mobile-exit" class="mobile-menu-exit" src="static/images/exit.svg" alt="Close Navigation">
+						
+						<ul class="primary-nav">
+							<li class="current"><a href="#">Home</a></li>
+							<li><a href="#">Login</a></li>
+							<li><a href="#">Sign Up</a></li>
+						</ul>
+		
+						<ul class="secondary-nav">
+							<li class="go-premium-cta"><a href="#">Movie Match Application</a></li>
+							<li><a href="#">Contact</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<form method='POST'></form>
+				<div class="container">
+					<div class="content">
+						<div class="card">
+							<div class="user">
+								<img id="img1" name="img1"
+									class="user"
+									src="https://image.tmdb.org/t/p/w500//8kNruSfhk5IoE4eZOc4UpvDn6tq.jpg"
+									alt=""
+								/>
+								<div class="profile">
+									<div class="name" name = "movieName" id = "movieName">myVar<span></span></div>
+									<div class="name"><span>Rating: 8.4</span></div>
+									<div class="local">
+										<i class="fas fa-map-marker-alt"></i>
+										<span>A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground "fight clubs" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="buttons">
+							<button id="no-button" class="no" onclick="submit_entry()">
+								<i class="fas fa-times"></i>
+							</button>
+							<button class="star">
+								<i class="fas fa-star fa"></i>
+							</dbutton>
+							<button class="heart">
+								<i class="fas fa-heart"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="left-col">
+                <p class="subhead">It's Nitty &amp; Gritty</p>
+                <h1>A Task App That Doesn't Stink</h1>
+
+                <div class="hero-cta">
+                    <a href="#" class="primary-cta">Try for free</a>
+                    <a href="#" class="watch-video-cta">
+                        <img src="images/watch.svg" alt="Watch a video">Watch a video
+                    </a>
+                </div>
+            </div>
+		</section>
+			
+
+	</body>
+	<script>
+		//const mobileBtn = document.getElementById('no-button');
+		var myVar = "global"
+		function submit_entry(){
+            var name = document.getElementById('img1');
+			var movieName = document.getElementById('movieName')
+			var entry = {
+				name: name.src,
+				movieName: movieName.innerHTML
+			};
+			movieName.innerHTML = "hello"
+			fetch(`${window.location}/getEntry`, {
+				method:"POST",
+				credentials:"include",
+				body:JSON.stringify(entry),
+				cache:"no-cache",
+				headers: new Headers({
+					"content-type": "application/json"
+				})
+			})
+			.then(function (response){
+
+				if(response.status !== 200){
+					console.log(`Response status was not 200: ${response.status}`)
+					return;
+				}
+
+				response.json().then(function (data){
+					console.log(data)
+				})
+
+			})
+        }
+
+		/*let image = document.getElementById('img1');
+		mobileBtn.addEventListener('click', () => {
+            image.src = "https://image.tmdb.org/t/p/w500///6KErczPBROQty7QoIsaa6wJYXZi.jpg";
+			submit_entry();
+        })*/ 
+	</script>
+</html>
