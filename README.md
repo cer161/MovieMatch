@@ -1,2 +1,15 @@
-# MovieMatch
-An application that suggests media based off of the user’s inputted genre and media preferences. The application Movie Match will be in the “Software tools for helping the users and making their life easier” category with its entire purpose being to help find media such as movies and TV shows that they would be interested in.
+<h1 align="center">
+<br>
+  <img src="https://github.com/reginaldop/tinder-html-css/blob/master/images/logo.png" width="150">
+<br>
+<br>
+Tinder HTML CSS
+</h1>
+
+<p align="center">Recreating Tinder HTML CSS</p>
+<p align="center">Watch on <a href="https://www.youtube.com/watch?v=xhEWK7kP1RU">Youtube</a></p>
+
+<div align="center">
+  <img align="center" src="https://github.com/reginaldop/tinder-html-css/blob/master/images/tinder.jpg">
+
+</div>
